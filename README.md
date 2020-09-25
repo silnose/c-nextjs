@@ -1,5 +1,9 @@
 # Curso NextJS ("platzi-podcasts")
 
+# Getting Started
+
+---
+
 <https://nextjs.org/docs/getting-started >
 
 Next.js es un framework para construir aplicaciones web modernas en React. Una de sus principales características es que es pensado para tener una excelente experiencia como desarrollador; pero una característica más poderosa es generar un buen SSR para el cliente y manejar el SEO mucho más optimizado, los buscadores nos podrán encontrar más rápido y Google nos indexará muchísimo mejor gracias al SSR agregado.
@@ -127,3 +131,5 @@ Hay un par de principios que debemos considerar a la hora de diseñar nuestras u
 # Rutas dinamicas
 
 <https://nextjs.org/learn/basics/dynamic-routes>
+
+# Vistas Hibridas

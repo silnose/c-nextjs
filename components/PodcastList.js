@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import slug from '../utils/slug';
 
-const PodcastList = ({ audioClips }) => {
+const PodcastList = ({ audioClips, handleOpenPodcast }) => {
   return (
     <>
       {audioClips.map((clip, index) => (
@@ -10,7 +10,9 @@ const PodcastList = ({ audioClips }) => {
             href={`/${slug(clip.channel.title)}/${clip.channel.id}/${slug(
               clip.title
             )}/${clip.id}`}>
-            <a className='podcast'>
+            <a
+              className='podcast'
+              onClick={(event) => handleOpenPodcast(event, clip)}>
               <h3>{clip.title}</h3>
               <div className='meta'>
                 {Math.ceil(clip.duration / 60)} minutes

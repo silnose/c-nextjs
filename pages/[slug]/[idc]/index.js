@@ -1,10 +1,23 @@
 import 'isomorphic-fetch';
+import { useState } from 'react';
 import Error from '../../_error';
 import ChannelGrid from '../../../components/ChannelGrid.js';
 import Layout from '../../../components/Layout';
 import PodcastList from '../../../components/PodcastList';
+import PodcastPlayer from '../../../components/PodcastPlayer';
 
 const Channel = ({ channel, audioClips, childChannels, statusCode }) => {
+  const [openPodcast, setOpenPodcast] = useState(null);
+  const handleOpenPodcast = (event, podcast) => {
+    event.preventDefault();
+    setOpenPodcast(podcast);
+  };
+
+  const handleOnClosePodcast = (event) => {
+    console.log('jjdj');
+    event.preventDefault();
+    setOpenPodcast(null);
+  };
   if (statusCode !== 200) {
     return <Error statusCode={statusCode} />;
   }
@@ -12,6 +25,14 @@ const Channel = ({ channel, audioClips, childChannels, statusCode }) => {
     <>
       <Layout title={channel.title}>
         <h1>{channel.title}</h1>
+        {openPodcast && (
+          <div className='modal'>
+            <PodcastPlayer
+              audioClip={openPodcast}
+              onClose={handleOnClosePodcast}
+            />
+          </div>
+        )}
         {childChannels.length > 0 && (
           <div>
             <h2>Series</h2>
@@ -20,7 +41,10 @@ const Channel = ({ channel, audioClips, childChannels, statusCode }) => {
           </div>
         )}
         <h2>Latest Podcasts</h2> <hr />
-        <PodcastList audioClips={audioClips} />
+        <PodcastList
+          audioClips={audioClips}
+          handleOpenPodcast={handleOpenPodcast}
+        />
       </Layout>
       <style jsx>{`
         h1 {
@@ -44,6 +68,15 @@ const Channel = ({ channel, audioClips, childChannels, statusCode }) => {
           height: 1px;
           background-color: #ccc;
           border: none;
+        }
+        .modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 99999;
+          background-color: black;
         }
       `}</style>
     </>
