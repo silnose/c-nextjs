@@ -1,73 +1,32 @@
 import 'isomorphic-fetch';
-import Link from 'next/link';
+import Error from './_error';
+import ChannelGrid from '../components/ChannelGrid';
+import Layout from '../components/Layout';
 
 export default class extends React.Component {
   render() {
-    const { channels } = this.props;
+    const { channels, statusCode } = this.props;
+
+    if (statusCode !== 200) {
+      return <Error statusCode={statusCode} />;
+    }
     return (
-      <>
-        <header>Podcasts</header>
-        <div className='channels'>
-          {channels.map((item, index) => (
-            <div key={index}>
-              <Link
-                href={{
-                  pathname: '/channel',
-                  query: { id: item.id },
-                }}>
-                <a className='channel'>
-                  <img src={item.urls.logo_image.original} alt={item.title} />
-                  <h2>{item.title}</h2>
-                </a>
-              </Link>
-            </div>
-          ))}
-        </div>
-        <style jsx>{`
-          :global(body) {
-            margin: 0;
-            font-family: system-ui;
-            background: white;
-          }
-          header {
-            color: #fff;
-            background: #8756ca;
-            padding: 15px;
-            text-align: center;
-          }
-          .channels {
-            display: grid;
-            grid-gap: 15px;
-            padding: 15px;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-          }
-          a.channel {
-            display: block;
-            margin-bottom: 0.5em;
-            color: #333;
-            text-decoration: none;
-          }
-          .channel img {
-            border-radius: 3px;
-            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-            width: 100%;
-          }
-          h2 {
-            padding: 5px;
-            font-size: 0.9em;
-            font-weight: 600;
-            margin: 0;
-            text-align: center;
-          }
-        `}</style>
-      </>
+      <Layout title='Podcasts'>
+        <ChannelGrid channels={channels} />
+      </Layout>
     );
   }
 }
 
-export async function getServerSideProps() {
-  let req = await fetch('https://api.audioboom.com/channels/recommended');
-  let { body: channels } = await req.json();
+export async function getServerSideProps({ res }) {
+  try {
+    let req = await fetch('https://api.audioboom.com/channels/recommended');
+    let { body: channels } = await req.json();
 
-  return { props: { channels: channels } };
+    return { props: { channels, statusCode: 200 } };
+  } catch (error) {
+    let statusCode = 503;
+    res.statusCode = statusCode;
+    return { props: { channels: null, statusCode: statusCode } };
+  }
 }

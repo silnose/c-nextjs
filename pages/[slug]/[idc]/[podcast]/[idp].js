@@ -1,12 +1,17 @@
 import 'isomorphic-fetch';
 import Link from 'next/link';
+import slug from '../../../../utils/slug';
+import Layout from '../../../../components/Layout';
 const Podcast = ({ audioClip }) => {
   return (
     <>
       <div className='modal'>
         <div className='clip'>
           <nav>
-            <Link href={`/channel?id=${audioClip.channel.id}`}>
+            <Link
+              href={`/${slug(audioClip.channel.title)}/${
+                audioClip.channel.id
+              }`}>
               <a className='close'>
                 <b>Go Back</b>
               </a>
@@ -97,24 +102,15 @@ const Podcast = ({ audioClip }) => {
           z-index: 99999;
         }
       `}</style>
-
-      <style jsx global>{`
-        body {
-          margin: 0;
-          font-family: system-ui;
-          background: white;
-        }
-      `}</style>
     </>
   );
 };
 
-export async function getServerSideProps({ query }) {
-  const audioClipID = query.id;
+export async function getServerSideProps({ query: { idp: id } }) {
+  const audioClipID = id;
   let req = await fetch(
     `https://api.audioboom.com/audio_clips/${audioClipID}.mp3`
   );
-  debugger;
   let {
     body: { audio_clip },
   } = await req.json();

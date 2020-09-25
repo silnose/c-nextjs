@@ -2,7 +2,7 @@
 
 <https://nextjs.org/docs/getting-started >
 
-NextJS, según su definición, es un pequeño framework que hace server-rendering de aplicaciones basadas en JavaScript. Como desarrolladores entre nuestros propósitos encontramos el hecho de hacer las cosas de una manera más facil y eso no es más que lo que nos trae Next, abstrayendo toda la parte del Server Rendering que a veces nos puede causar dolores de cabeza.
+Next.js es un framework para construir aplicaciones web modernas en React. Una de sus principales características es que es pensado para tener una excelente experiencia como desarrollador; pero una característica más poderosa es generar un buen SSR para el cliente y manejar el SEO mucho más optimizado, los buscadores nos podrán encontrar más rápido y Google nos indexará muchísimo mejor gracias al SSR agregado.
 
 # Iniciando
 
@@ -74,7 +74,7 @@ Next.JS usa una mezcla de los dos: SSR para la carga inicial (por ser más rápi
 
 La principal diferencia entre ambas funciones es que getServerSideProps() se llama en cada carga de página, mientras que getStaticProps() solo es llamada al momento de hacer build.
 
-# LINK
+# LINK (componente)
 
 <https://nextjs.org/docs/api-reference/next/link>
 
@@ -91,3 +91,39 @@ PERO! si abrimos un link en un nuevo tab! se ejecutara server side rendering.
 # PARAMETROS URL
 
 <https://nextjs.org/docs/api-reference/next/link>
+
+# HEAD (componente)
+
+<https://nextjs.org/docs/api-reference/next/head>
+
+# ERROR
+
+<https://nextjs.org/docs/advanced-features/custom-error-page#404-page>
+
+# Custom Document
+
+<https://nextjs.org/docs/advanced-features/custom-document>
+
+Para implementar ciertas librerias podriamos necesitar agregar informacion al Document, esto para casos muy particulares como por ejemplo implementar:
+
+- google AMP
+- Facebook instant pages
+- Plugins como styled components
+
+# Diseño URLs
+
+Hay un par de principios que debemos considerar a la hora de diseñar nuestras url:
+
+- _Legibilidad_: Deben ser fácilmente entendibles para los usuarios. Un usuario deberia poder ver una URL y inmediatamente entenderla.
+  - //Esto no es legible
+    - /channel?id=156486
+  - //Esto si
+    - /myFavoriteChannel
+- _Consistencia_: Deberíamos poder borrar cualquier fragmento y la URL deberia continuar funcionando.
+  - /myFavoriteChannel/my-live-audio
+  - /myFavoriteChannel
+  - /
+
+# Rutas dinamicas
+
+<https://nextjs.org/learn/basics/dynamic-routes>
