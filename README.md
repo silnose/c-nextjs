@@ -1,12 +1,14 @@
 # Curso NextJS ("platzi-podcasts")
 
-# Getting Started
-
----
+<https://hello-next-js-indol.vercel.app/>
 
 <https://nextjs.org/docs/getting-started >
 
 Next.js es un framework para construir aplicaciones web modernas en React. Una de sus principales características es que es pensado para tener una excelente experiencia como desarrollador; pero una característica más poderosa es generar un buen SSR para el cliente y manejar el SEO mucho más optimizado, los buscadores nos podrán encontrar más rápido y Google nos indexará muchísimo mejor gracias al SSR agregado.
+
+![](./readme-static/1.png)
+![](./readme-static/2.png)
+![](./readme-static/3.png)
 
 # Iniciando
 
@@ -133,3 +135,21 @@ Hay un par de principios que debemos considerar a la hora de diseñar nuestras u
 <https://nextjs.org/learn/basics/dynamic-routes>
 
 # Vistas Hibridas
+
+...
+
+## Licencia 📄
+
+MIT
+
+## Conceptos Aprendidos 🤓
+
+- <https://platzi.com/courses/nextjs/>
+
+## Certificado
+
+- [Diploma](./readme-static/diploma-next-2018.pdf)
+
+---
+
+👩‍💻 with ❤️ by [silnose](https://github.com/silnose) 😊
